@@ -20,9 +20,9 @@ function buildDeck() {
     let types = ["C", "D", "H", "S"];
     deck = [];
 
-    for (let i = 0; i < types.length; i++) {
-        for (let j = 0; j < values.length; j++) {
-            deck.push(values[j] + "-" + types[i]);
+    for (const val of values) {
+        for (const type of types) {
+            deck.push(val + '-' + type)
         }
     }
     console.log(deck);
@@ -90,7 +90,7 @@ function hit() {
 }
 
 function stay() {
-    
+
     dealerSum = reduceAce(dealerSum, dealerAcecount);
     yourSum = reduceAce(yourSum, yourAceCount);
 
@@ -99,29 +99,26 @@ function stay() {
 
 
     let message = "";
+
     if (yourSum > 21) {
         message = "You lose!";
     }
 
-    else if (yourSum <= 21) {
-        message = "You win!";
-
-        if (yourSum == dealerSum) {
-            message = "Tie!";
-        }
-    
-    
-        else if (yourSum > dealerSum) {
-            message = "You win!";
-        }
-    
-    
-        else if (yourSum < dealerSum) {
-            message = "You lose!";
-        }
+    else if (dealerSum > 21) {
+        message = "You win!"
     }
 
+    else if (yourSum == dealerSum) {
+        message = "Tie!";
+    }
 
+    else if (yourSum > dealerSum) {
+        message = "You win!";
+    }
+
+    else if (yourSum < dealerSum) {
+        message = "You lose!";
+    }
 
     document.getElementById("dealer-sum").innerText = dealerSum;
     document.getElementById("your-sum").innerText = yourSum;
@@ -155,4 +152,12 @@ function reduceAce(playerSum, playerAceCount) {
         playerAceCount -= 1;
     }
     return playerSum;
+}
+
+function reduceAce(dealerSum, dealerAceCount) {
+    while (dealerSum > 21 && dealerAceCount > 0) {
+        dealerSum -= 10;
+        dealerAceCount -= 1;
+    }
+    return dealerSum;
 }
