@@ -67,6 +67,7 @@ function startGame() {
     console.log(yourSum);
     document.getElementById("hit").addEventListener("click", hit);
     document.getElementById("stand").addEventListener("click", stay);
+    document.getElementById("split").addEventListener("click", split);
     document.getElementById("restart").addEventListener("click", function () {
         location.reload();
     });
@@ -125,6 +126,29 @@ function stay() {
     document.getElementById("results").innerText = message;
 }
 
+function checkSplitOption() {
+if (playerHand.length === 2 && playerHand[0].value === playerHand[1].value) {
+    splitButton.disabled = false;
+} else {
+    splitButton.disabled = true;
+}
+
+}
+
+
+function splitHand() {
+    if (playerHand[0].value === playerHand[1].value) {
+        const splitHand1 = [playerHand[0],deck.pop()];
+        const splitHand2 = [playerHand[1],deck.pop()];
+
+        playerHand = splitHand1;
+        const playerSplitHand = splitHand2
+
+        renderHands();
+        alert("You split your hand!");
+    }
+}
+
 function getValue(card) {
 
     let data = card.split("-");
@@ -161,3 +185,13 @@ function reduceAce(dealerSum, dealerAceCount) {
     }
     return dealerSum;
 }
+
+fetch("https://kool.krister.ee/chat/Simple_blackjack",{
+    method: "POST",
+    header: {
+        "Content-Type": "application/json"
+    },
+    body:JSON.stringify({ message: "...",
+name:""})
+})
+
