@@ -185,13 +185,3 @@ function reduceAce(dealerSum, dealerAceCount) {
     }
     return dealerSum;
 }
-
-fetch("https://kool.krister.ee/chat/Simple_blackjack",{
-    method: "POST",
-    header: {
-        "Content-Type": "application/json"
-    },
-    body:JSON.stringify({ message: "...",
-name:""})
-})
-
