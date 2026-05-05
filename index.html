@@ -7,38 +7,45 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h2>Dealer: <span id="dealer-sum"></span></h2>
-        <div id="dealer-cards">
-            <img id="hidden" src="./cards/BACK.png">
+        <div class="blackjack-container">
+            <!-- Dealer Section -->
+            <div class="table-section dealer-section">
+                <h2 class="section-title">Dealer</h2>
+                <div id="dealer-cards" class="cards-area">
+                    <img id="hidden" src="./cards/BACK.png" class="card-image">
+                </div>
+                <div class="hand-value-indicator">
+                    <span class="value-label">Hand Value:</span>
+                    <span id="dealer-sum" class="value-display">0</span>
+                </div>
+            </div>
 
+            <!-- Results Display -->
+            <div class="results-section">
+                <p id="results" class="results-text"></p>
+            </div>
+
+            <!-- Player Section -->
+            <div class="table-section player-section">
+                <h2 class="section-title">You</h2>
+                <div id="your-cards" class="cards-area"></div>
+                <div class="hand-value-indicator">
+                    <span class="value-label">Hand Value:</span>
+                    <span id="your-sum" class="value-display">0</span>
+                </div>
+            </div>
+
+            <!-- Controls Section -->
+            <div class="controls-section">
+                <button id="hit" class="game-button hit-button">Hit</button>
+                <button id="stand" class="game-button stand-button">Stand</button>
+                <button id="split" class="game-button split-button">Split</button>
+                <button id="restart" class="game-button restart-button">Restart</button>
+                <a href="LandingPage.html" class="back-link">
+                    <button id="Back" class="game-button back-button">Back</button>
+                </a>
+            </div>
         </div>
-
-        <h2>You:<span id="your-sum"></span></h2>
-        <div id="your-cards"></div>
-
-        <section id="how-to-play">
-            <h3>How to play Blackjack</h3>
-            <p>Goal: get a hand value closer to 21 than the dealer without going over. Numbered cards are worth their number, J/Q/K are worth 10, and Aces are worth 1 or 11.</p>
-            <p>On your turn you can <strong>Hit</strong> to draw a card or <strong>Stand</strong> to end your turn. If your hand exceeds 21 you bust and lose. The dealer then reveals their hidden card and draws according to the rules.</p>
-
-            <h3>How to play this game</h3>
-            <ul>
-                <li><strong>Hit</strong>: draw a card for your hand.</li>
-                <li><strong>Stand</strong>: stop drawing and let the dealer play; the result will be shown.</li>
-                <li><strong>Restart</strong>: start a new round.</li>
-                <li><strong>Split</strong>: a split button is shown but full split functionality is not implemented in this version.</li>
-            </ul>
-        </section>
-
-        <br>
-        <button id="hit">Hit</button>
-        <button id="stand">Stand</button>
-        <button id="restart">Restart</button>
-        <button id="split">Split</button>
-        <a href="LogInPage.html">
-            <button id="Back">Back</button>
-        </a>
-        <p id="results"></p>
         <script src="script.js"></script>
     </body>
 </html>

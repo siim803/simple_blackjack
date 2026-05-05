@@ -45,32 +45,42 @@ function startGame() {
     console.log(hidden);
     console.log(dealerSum);
 
-    while (dealerSum < 17) {
-        let cardImg = document.createElement("img");
-        let card = deck.pop();
-        cardImg.src = "./cards/" + card + ".png"
-        dealerSum += getValue(card);
-        dealerAcecount += checkAce(card);
-        document.getElementById("dealer-cards").append(cardImg);
-    }
-    console.log(dealerSum)
+    let dealerCardImg = document.createElement("img");
+    let dealerCard = deck.pop();
+    dealerCardImg.src = "./cards/" + dealerCard + ".png";
+    dealerCardImg.className = "card-image";
+    dealerSum += getValue(dealerCard);
+    dealerAcecount += checkAce(dealerCard);
+    document.getElementById("dealer-cards").append(dealerCardImg);
 
     for (let i = 0; i < 2; i++) {
         let cardImg = document.createElement("img");
         let card = deck.pop();
         cardImg.src = "./cards/" + card + ".png";
+        cardImg.className = "card-image";
         yourSum += getValue(card);
         yourAceCount += checkAce(card);
         document.getElementById("your-cards").append(cardImg);
     }
 
     console.log(yourSum);
+    document.getElementById("dealer-sum").style.display = "none";
+    document.getElementById("your-sum").innerText = reduceAce(yourSum, yourAceCount);
+    
     document.getElementById("hit").addEventListener("click", hit);
     document.getElementById("stand").addEventListener("click", stay);
     document.getElementById("split").addEventListener("click", split);
     document.getElementById("restart").addEventListener("click", function () {
         location.reload();
     });
+}
+
+function updateHandDisplay() {
+    let displayDealerSum = reduceAce(dealerSum, dealerAcecount);
+    let displayYourSum = reduceAce(yourSum, yourAceCount);
+    
+    document.getElementById("dealer-sum").innerText = displayDealerSum;
+    document.getElementById("your-sum").innerText = displayYourSum;
 }
 
 function hit() {
@@ -81,9 +91,12 @@ function hit() {
     let cardImg = document.createElement("img");
     let card = deck.pop();
     cardImg.src = "./cards/" + card + ".png"
+    cardImg.className = "card-image";
     yourSum += getValue(card);
     yourAceCount += checkAce(card);
     document.getElementById("your-cards").append(cardImg);
+
+    updateHandDisplay();
 
     if (reduceAce(yourSum, yourAceCount) > 21) {
         canHit = false
@@ -91,13 +104,25 @@ function hit() {
 }
 
 function stay() {
+    canHit = false;
+    document.getElementById("hidden").src = "./cards/" + hidden + ".png";
+
+    while (reduceAce(dealerSum, dealerAcecount) < 17) {
+        let cardImg = document.createElement("img");
+        let card = deck.pop();
+        cardImg.src = "./cards/" + card + ".png"
+        cardImg.className = "card-image";
+        dealerSum += getValue(card);
+        dealerAcecount += checkAce(card);
+        document.getElementById("dealer-cards").append(cardImg);
+    }
 
     dealerSum = reduceAce(dealerSum, dealerAcecount);
     yourSum = reduceAce(yourSum, yourAceCount);
 
-    canHit = false;
-    document.getElementById("hidden").src = "./cards/" + hidden + ".png";
-
+    document.getElementById("dealer-sum").style.display = "block";
+    document.getElementById("dealer-sum").innerText = dealerSum;
+    document.getElementById("your-sum").innerText = yourSum;
 
     let message = "";
 
@@ -121,36 +146,23 @@ function stay() {
         message = "You lose!";
     }
 
-    document.getElementById("dealer-sum").innerText = dealerSum;
-    document.getElementById("your-sum").innerText = yourSum;
+    updateHandDisplay();
     document.getElementById("results").innerText = message;
 }
 
+function split() {
+    console.log("Split function called");
+}
+
 function checkSplitOption() {
-if (playerHand.length === 2 && playerHand[0].value === playerHand[1].value) {
-    splitButton.disabled = false;
-} else {
-    splitButton.disabled = true;
-}
-
-}
-
-
-function splitHand() {
-    if (playerHand[0].value === playerHand[1].value) {
-        const splitHand1 = [playerHand[0],deck.pop()];
-        const splitHand2 = [playerHand[1],deck.pop()];
-
-        playerHand = splitHand1;
-        const playerSplitHand = splitHand2
-
-        renderHands();
-        alert("You split your hand!");
+    if (playerHand.length === 2 && playerHand[0].value === playerHand[1].value) {
+        splitButton.disabled = false;
+    } else {
+        splitButton.disabled = true;
     }
 }
 
 function getValue(card) {
-
     let data = card.split("-");
     let value = data[0];
 
@@ -170,18 +182,10 @@ function checkAce(card) {
     return 0;
 }
 
-function reduceAce(playerSum, playerAceCount) {
-    while (playerSum > 21 && playerAceCount > 0) {
-        playerSum -= 10;
-        playerAceCount -= 1;
+function reduceAce(sum, aceCount) {
+    while (sum > 21 && aceCount > 0) {
+        sum -= 10;
+        aceCount -= 1;
     }
-    return playerSum;
-}
-
-function reduceAce(dealerSum, dealerAceCount) {
-    while (dealerSum > 21 && dealerAceCount > 0) {
-        dealerSum -= 10;
-        dealerAceCount -= 1;
-    }
-    return dealerSum;
+    return sum;
 }

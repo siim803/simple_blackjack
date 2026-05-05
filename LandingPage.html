@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack - Welcome</title>
+    <link rel="stylesheet" href="landing-style.css">
+</head>
+<body>
+    <div class="landing-container">
+        <!-- Header/Logo Section -->
+        <div class="header-section">
+            <h1 class="game-title">
+                <span class="title-blackjack">BLACKJACK</span>
+                <span class="title-subtitle">21</span>
+            </h1>
+        </div>
+
+        <!-- Play Button -->
+        <a href="index.html" class="play-button-link">
+            <button class="play-button">PLAY NOW</button>
+        </a>
+
+        <!-- Instructions Section -->
+        <section class="instructions-section">
+            <div class="instructions-content">
+                <!-- How to Play Blackjack -->
+                <div class="instruction-card">
+                    <h2 class="card-title">THE GAME</h2>
+                    <div class="card-body">
+                        <p class="instruction-text">
+                            <strong>Objective:</strong> Get a hand value closer to 21 than the dealer without going over.
+                        </p>
+                        <ul class="rules-list">
+                            <li><strong>Numbered Cards:</strong> Worth their face value</li>
+                            <li><strong>J, Q, K:</strong> Worth 10 points</li>
+                            <li><strong>Ace:</strong> Worth 1 or 11 points</li>
+                        </ul>
+                        <p class="instruction-text">
+                            If your hand exceeds 21, you bust and lose immediately. The dealer then reveals their hidden card and draws according to the rules.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Rules -->
+                <div class="instruction-card">
+                    <h2 class="card-title">RULES</h2>
+                    <div class="card-body">
+                        <ul class="rules-list">
+                            <li><strong>Blackjack:</strong> 21 with first 2 cards (Ace + 10-value card)</li>
+                            <li><strong>Bust:</strong> Hand exceeds 21 and you lose</li>
+                            <li><strong>Dealer Must Hit:</strong> Dealer hits on 16 or lower</li>
+                            <li><strong>Dealer Must Stand:</strong> Dealer stands on 17 or higher</li>
+                            <li><strong>Push/Tie:</strong> Same hand value as dealer</li>
+                            <li><strong>Soft Hand:</strong> Hand with Ace counted as 11</li>
+                            <li><strong>Hard Hand:</strong> Hand without Ace or Ace as 1</li>
+                            <li><strong>Win Condition:</strong> Closer to 21 than dealer without bust</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- How to Play This Game -->
+                <div class="instruction-card">
+                    <h2 class="card-title">CONTROLS</h2>
+                    <div class="card-body">
+                        <ul class="controls-list">
+                            <li>
+                                <span class="control-name hit-control">HIT</span>
+                                <span class="control-desc">Draw another card to your hand</span>
+                            </li>
+                            <li>
+                                <span class="control-name stand-control">STAND</span>
+                                <span class="control-desc">End your turn and let dealer play</span>
+                            </li>
+                            <li>
+                                <span class="control-name split-control">SPLIT</span>
+                                <span class="control-desc">Split your hand (limited support)</span>
+                            </li>
+                            <li>
+                                <span class="control-name restart-control">RESTART</span>
+                                <span class="control-desc">Start a new round</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="landing-footer">
+            <p>Good luck, and remember to play responsibly!</p>
+        </footer>
+    </div>
+</body>
+</html>
